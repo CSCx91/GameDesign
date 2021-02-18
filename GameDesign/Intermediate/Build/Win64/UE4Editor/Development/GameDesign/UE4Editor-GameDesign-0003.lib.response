@@ -1,0 +1,16 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-GameDesign-0003.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\Mindl\Documents\GitHub\GameDesign\GameDesign\Intermediate\Build\Win64\GameDesignEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"C:\Users\Mindl\Documents\GitHub\GameDesign\GameDesign\Intermediate\Build\Win64\UE4Editor\Development\GameDesign\CHAR_Cyborg.cpp.obj"
+"C:\Users\Mindl\Documents\GitHub\GameDesign\GameDesign\Intermediate\Build\Win64\UE4Editor\Development\GameDesign\GameDesign.cpp.obj"
+"C:\Users\Mindl\Documents\GitHub\GameDesign\GameDesign\Intermediate\Build\Win64\UE4Editor\Development\GameDesign\CHAR_Cyborg.gen.cpp.obj"
+"C:\Users\Mindl\Documents\GitHub\GameDesign\GameDesign\Intermediate\Build\Win64\UE4Editor\Development\GameDesign\GameDesign.init.gen.cpp.obj"
+"C:\Users\Mindl\Documents\GitHub\GameDesign\GameDesign\Intermediate\Build\Win64\UE4Editor\Development\GameDesign\Default.rc2.res"
+/OUT:"C:\Users\Mindl\Documents\GitHub\GameDesign\GameDesign\Intermediate\Build\Win64\UE4Editor\Development\GameDesign\UE4Editor-GameDesign-0003.lib"
+/INCLUDE:IMPLEMENT_MODULE_GameDesign

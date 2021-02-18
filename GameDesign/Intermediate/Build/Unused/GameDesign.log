@@ -1,0 +1,16 @@
+﻿  Using 'git status' to determine working set for adaptive non-unity build (C:\Users\Mindl\Documents\GitHub\GameDesign).
+  Parsing headers for GameDesignEditor
+    Running UnrealHeaderTool "C:\Users\Mindl\Documents\GitHub\GameDesign\GameDesign\GameDesign.uproject" "C:\Users\Mindl\Documents\GitHub\GameDesign\GameDesign\Intermediate\Build\Win64\GameDesignEditor\Development\GameDesignEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -abslog="C:\Users\Mindl\AppData\Local\UnrealBuildTool\Log_UHT.txt" -installed
+  Reflection code generated for GameDesignEditor in 3.1139914 seconds
+  Building GameDesignEditor...
+  Using Visual Studio 2019 14.24.28319 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314) and Windows 10.0.18362.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+  Building 5 actions with 8 processes...
+    [1/5] CHAR_Cyborg.cpp
+    [2/5] CHAR_Cyborg.gen.cpp
+    [3/5] UE4Editor-GameDesign-0002.lib
+       Creating library C:\Users\Mindl\Documents\GitHub\GameDesign\GameDesign\Intermediate\Build\Win64\UE4Editor\Development\GameDesign\UE4Editor-GameDesign-0002.lib and object C:\Users\Mindl\Documents\GitHub\GameDesign\GameDesign\Intermediate\Build\Win64\UE4Editor\Development\GameDesign\UE4Editor-GameDesign-0002.exp
+    [4/5] UE4Editor-GameDesign-0002.dll
+       Creating library C:\Users\Mindl\Documents\GitHub\GameDesign\GameDesign\Intermediate\Build\Win64\UE4Editor\Development\GameDesign\UE4Editor-GameDesign-0002.suppressed.lib and object C:\Users\Mindl\Documents\GitHub\GameDesign\GameDesign\Intermediate\Build\Win64\UE4Editor\Development\GameDesign\UE4Editor-GameDesign-0002.suppressed.exp
+    [5/5] GameDesignEditor.target
+  Total time in Parallel executor: 1.17 seconds
+  Total execution time: 4.80 seconds

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\GameDesign.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{6963B07F-887B-4A38-91F9-FCA2DF90092F}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\GameDesign.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\GameDesignEditor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <Filter Include="Config">
+      <UniqueIdentifier>{26A627E2-3F3D-42C0-A58E-483A32F5E5FD}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\GameDesign">
+      <UniqueIdentifier>{FA4F4A1B-3F94-4F7C-A924-EB4E338B1C38}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\GameDesign\GameDesign.Build.cs">
+      <Filter>Source\GameDesign</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\GameDesign\GameDesign.cpp">
+      <Filter>Source\GameDesign</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\GameDesign\GameDesign.h">
+      <Filter>Source\GameDesign</Filter>
+    </ClInclude>
+    <Filter Include="Source\GameDesign\Private">
+      <UniqueIdentifier>{AD5BEED9-15B5-4A8F-910D-32B105D6DE7E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameDesign\Private\Characters">
+      <UniqueIdentifier>{D1389511-8DA9-4C8C-976A-072C933C43CC}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\GameDesign\Private\Characters\CHAR_Cyborg.cpp">
+      <Filter>Source\GameDesign\Private\Characters</Filter>
+    </ClCompile>
+    <Filter Include="Source\GameDesign\Public">
+      <UniqueIdentifier>{B82C5AFC-0D9C-4C66-8B6B-DC56DC9D3F51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameDesign\Public\Characters">
+      <UniqueIdentifier>{D3854339-D16B-495C-8887-1ACB854E04BB}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\GameDesign\Public\Characters\CHAR_Cyborg.h">
+      <Filter>Source\GameDesign\Public\Characters</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

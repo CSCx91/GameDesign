@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "GameDesign",
+			"Path": "C:\\Users\\Mindl\\Documents\\GitHub\\GameDesign\\GameDesign\\Source\\GameDesign.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "GameDesignEditor",
+			"Path": "C:\\Users\\Mindl\\Documents\\GitHub\\GameDesign\\GameDesign\\Source\\GameDesignEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
