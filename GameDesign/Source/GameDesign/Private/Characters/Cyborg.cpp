@@ -75,15 +75,15 @@ void ACyborg::LookUpAtRate(float Value)
 //Will change to fire while held down
 void ACyborg::PrimaryFire()
 {
-	FVector Loc;
-	FRotator Rot;
+	FVector Location;
+	FRotator Rotation;
 	FHitResult Hit;
 
-	GetController()->GetPlayerViewPoint(Loc, Rot);
+	GetController()->GetPlayerViewPoint(Location, Rotation);
 
-	FVector Start = Loc;
-	FVector End = Start + (Rot.Vector() * 2000);
-
+	FVector Start = Location;
+	FVector End = Start + (Rotation.Vector() * 2000);
+    
 	FCollisionQueryParams TraceParams;
 	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
 
