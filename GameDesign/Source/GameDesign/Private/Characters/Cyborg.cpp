@@ -84,6 +84,32 @@ void ACyborg::PrimaryFireReleased()
 	GetWorldTimerManager().ClearTimer(MyHandle);
 }
 
+void ACyborg::FireBullet()
+{
+	FVector Location;
+	FRotator Rotation;
+	FHitResult Hit;
+
+	GetController()->GetPlayerViewPoint(Location, Rotation);
+
+	FVector Start = Location;
+	FVector End = Start + (Rotation.Vector() * 2000);
+
+	FCollisionQueryParams TraceParams;
+	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
+
+	DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 2.0f);
+}
+
+void ACyborg::SecondaryFire()
+{
+	
+}
+
+void ACyborg::FireRocket()
+{
+	
+}
 
 void ACyborg::Interact()
 {
@@ -102,26 +128,6 @@ void ACyborg::Interact()
 	DrawDebugLine(GetWorld(), Start, End, FColor::Blue, false, 2.0f);
 }
 
-void ACyborg::FireBullet()
-{
-	FVector Location;
-	FRotator Rotation;
-	FHitResult Hit;
-
-	GetController()->GetPlayerViewPoint(Location, Rotation);
-
-	FVector Start = Location;
-	FVector End = Start + (Rotation.Vector() * 2000);
-
-	FCollisionQueryParams TraceParams;
-	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
-
-	DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 2.0f);
-}
-
-	
-
-
 // Called to bind functionality to input
 void ACyborg::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -131,6 +137,7 @@ void ACyborg::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 	PlayerInputComponent->BindAction("PrimaryFire", IE_Pressed, this, &ACyborg::PrimaryFire);
 	PlayerInputComponent->BindAction("PrimaryFire", IE_Released, this, &ACyborg::PrimaryFireReleased);
+	PlayerInputComponent->BindAction("SecondaryFire", IE_Pressed, this, &ACyborg::SecondaryFire);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACyborg::Interact);
 	
 	PlayerInputComponent->BindAxis("MoveForward",this, &ACyborg::MoveForward);

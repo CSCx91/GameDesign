@@ -37,9 +37,12 @@ protected:
 	void LookUpAtRate(float Value);
 	void PrimaryFire();
 	void PrimaryFireReleased();
-	void Interact();
-
 	void FireBullet();
+	
+	void SecondaryFire();
+	void FireRocket();
+	
+	void Interact();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	float BaseTurnRate;
