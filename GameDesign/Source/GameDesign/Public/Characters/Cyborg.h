@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -37,13 +36,18 @@ protected:
 	void TurnAtRate(float Value);
 	void LookUpAtRate(float Value);
 	void PrimaryFire();
+	void PrimaryFireReleased();
 	void Interact();
+
+	void FireBullet();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	float BaseTurnRate;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	float BaseLookUpRate;
+
+	FTimerHandle MyHandle;
 
 public:	
 	// Called every frame
