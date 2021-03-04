@@ -76,30 +76,45 @@ void ACyborg::LookUpAtRate(float Value)
 void ACyborg::PrimaryFire()
 {
 	FireBullet();
-	GetWorldTimerManager().SetTimer(MyHandle, this, &ACyborg::FireBullet, 0.2f, true);
+	GetWorldTimerManager().SetTimer(FireBulletTimer, this, &ACyborg::FireBullet, 0.2f, true);
 }
 
 void ACyborg::PrimaryFireReleased()
 {
-	GetWorldTimerManager().ClearTimer(MyHandle);
+	GetWorldTimerManager().ClearTimer(FireBulletTimer);
 }
 
 void ACyborg::FireBullet()
 {
-	FVector Location;
-	FRotator Rotation;
-	FHitResult Hit;
+	if(Magazine >= 1)
+	{
+		Magazine--;
+		FVector Location;
+		FRotator Rotation;
+		FHitResult Hit;
 
-	GetController()->GetPlayerViewPoint(Location, Rotation);
+		GetController()->GetPlayerViewPoint(Location, Rotation);
 
-	FVector Start = Location;
-	FVector End = Start + (Rotation.Vector() * 2000);
+		FVector Start = Location;
+		FVector End = Start + (Rotation.Vector() * 2000);
 
-	FCollisionQueryParams TraceParams;
-	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
+		FCollisionQueryParams TraceParams;
+		GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
 
-	DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 2.0f);
+		DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 2.0f);
+	}
+	if(Magazine == 0)
+	{
+		GetWorldTimerManager().SetTimer(ReloadTimer, this, &ACyborg::ReloadPrimary, 2.5f, false);
+	}
 }
+
+void ACyborg::ReloadPrimary()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Reloading"));
+	Magazine = 25;
+}
+
 
 void ACyborg::SecondaryFire()
 {

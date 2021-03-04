@@ -25,6 +25,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
 	UStaticMeshComponent* MeshComp;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
+	int Magazine = 25;
 	
 
 protected:
@@ -38,6 +41,7 @@ protected:
 	void PrimaryFire();
 	void PrimaryFireReleased();
 	void FireBullet();
+	void ReloadPrimary();
 	
 	void SecondaryFire();
 	void FireRocket();
@@ -50,7 +54,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	float BaseLookUpRate;
 
-	FTimerHandle MyHandle;
+	FTimerHandle FireBulletTimer;
+
+	FTimerHandle ReloadTimer;
 
 public:	
 	// Called every frame

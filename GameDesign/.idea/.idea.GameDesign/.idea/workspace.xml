@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fdcfcae-335d-4018-9488-58568dbd3319" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/contentModel.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/riderModule.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultInput.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultInput.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Cyborg.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Cyborg.h" afterDir="false" />
     </list>
@@ -167,6 +170,7 @@
       <workItem from="1614465004904" duration="1847000" />
       <workItem from="1614646058840" duration="5090000" />
       <workItem from="1614702964682" duration="1525000" />
+      <workItem from="1614876748270" duration="744000" />
     </task>
     <servers />
   </component>
