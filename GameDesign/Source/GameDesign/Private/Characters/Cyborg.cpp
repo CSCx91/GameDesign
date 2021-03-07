@@ -3,6 +3,7 @@
 
 #include "Characters/Cyborg.h"
 #include "DrawDebugHelpers.h"
+#include "Characters/Rocket.h"
 
 // Sets default values
 ACyborg::ACyborg()
@@ -118,12 +119,33 @@ void ACyborg::ReloadPrimary()
 
 void ACyborg::SecondaryFire()
 {
-	
+	FireRocket();
 }
 
 void ACyborg::FireRocket()
 {
-	
+	FVector Location;
+	FRotator Rotation;
+	FHitResult Hit;
+
+	GetController()->GetPlayerViewPoint(Location, Rotation);
+
+	FVector Start = Location;
+	FVector End = Start + (Rotation.Vector() * 2000);
+
+	if (ProjectileClass != NULL)
+	{
+		const FRotator SpawnRotation = GetControlRotation();
+		const FVector SpawnLocation = Location + (Rotation.Vector() * 2000);
+		UWorld* const World = GetWorld();
+		if (World != NULL)
+		{
+			ARocket* Rocket = World->SpawnActor<ARocket>(ProjectileClass, Start, SpawnRotation);
+			FVector NewVelocity = GetActorForwardVector() * 3000.f;
+
+			Rocket->Velocity = FVector(NewVelocity);
+		}
+	}
 }
 
 void ACyborg::Interact()

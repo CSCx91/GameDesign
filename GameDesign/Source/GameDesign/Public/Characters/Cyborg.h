@@ -28,6 +28,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
 	int Magazine = 25;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
+	TSubclassOf<class ARocket> ProjectileClass;
 	
 
 protected:
