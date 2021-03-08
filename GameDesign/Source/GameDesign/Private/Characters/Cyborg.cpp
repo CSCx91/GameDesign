@@ -135,13 +135,13 @@ void ACyborg::FireRocket()
 
 	if (ProjectileClass != NULL)
 	{
-		const FRotator SpawnRotation = GetControlRotation();
-		const FVector SpawnLocation = Location + (Rotation.Vector() * 2000);
+		FRotator SpawnRotation = Rotation;
+		FVector SpawnLocation = Location + (Rotation.Vector() * 2000);
 		UWorld* const World = GetWorld();
 		if (World != NULL)
 		{
 			ARocket* Rocket = World->SpawnActor<ARocket>(ProjectileClass, Start, SpawnRotation);
-			FVector NewVelocity = GetActorForwardVector() * 3000.f;
+			FVector NewVelocity = Rotation.Vector().ForwardVector * 3000.f;
 
 			Rocket->Velocity = FVector(NewVelocity);
 		}

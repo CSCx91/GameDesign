@@ -21,6 +21,8 @@ public:
         FVector Velocity = FVector(100.f);
 
     float BulletExpiry = 0;
+    
+    APlayerController* PlayerController; 
 
 protected:
     // Called when the game starts or when spawned

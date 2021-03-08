@@ -11,7 +11,6 @@ ARocket::ARocket()
     PrimaryActorTick.bCanEverTick = true;
 
     RootComp = CreateDefaultSubobject<USceneComponent>(TEXT("RootComp"));
-
     RootComponent = RootComp;
 }
 
@@ -19,6 +18,8 @@ ARocket::ARocket()
 void ARocket::BeginPlay()
 {
     Super::BeginPlay();
+    
+    PlayerController = Cast<APlayerController>(GEngine->GetFirstLocalPlayerController(GetWorld()));
 }
 
 // Called every frame
@@ -28,9 +29,16 @@ void ARocket::Tick(float DeltaTime)
 
     FHitResult HitResult;
 
+    FVector PlayerLocation;
+    FRotator PlayerRotation;
+    
     FVector StartTrace = this->GetActorLocation();
     FVector EndTrace = (Velocity * DeltaTime) + StartTrace;
-    EndTrace.Z += this->GetActorRotation().Pitch;
+    PlayerController->GetPlayerViewPoint(PlayerLocation, PlayerRotation);
+    EndTrace.X += PlayerRotation.Roll;
+    EndTrace.Y += PlayerRotation.Yaw;
+    EndTrace.Z += PlayerRotation.Pitch;
+    
 
     FCollisionQueryParams CollisionParams;
     CollisionParams.AddIgnoredActor(this);
