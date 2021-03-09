@@ -3,6 +3,7 @@
 
 #include "Characters/Cyborg.h"
 #include "DrawDebugHelpers.h"
+#include "Characters/Rocket.h"
 
 // Sets default values
 ACyborg::ACyborg()
@@ -35,6 +36,8 @@ void ACyborg::BeginPlay()
 void ACyborg::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	
 
 }
 
@@ -76,40 +79,97 @@ void ACyborg::LookUpAtRate(float Value)
 void ACyborg::PrimaryFire()
 {
 	FireBullet();
-	GetWorldTimerManager().SetTimer(MyHandle, this, &ACyborg::FireBullet, 0.2f, true);
+	GetWorldTimerManager().SetTimer(FireBulletTimer, this, &ACyborg::FireBullet, 0.2f, true);
 }
 
 void ACyborg::PrimaryFireReleased()
 {
-	GetWorldTimerManager().ClearTimer(MyHandle);
+	GetWorldTimerManager().ClearTimer(FireBulletTimer);
 }
 
 void ACyborg::FireBullet()
 {
-	FVector Location;
-	FRotator Rotation;
-	FHitResult Hit;
+	//As long as the player continues to hold fire and has bullets, fire them
+	if(Magazine >= 1)
+	{
+		Magazine--;
+		FVector Location;
+		FRotator Rotation;
+		FHitResult Hit;
 
-	GetController()->GetPlayerViewPoint(Location, Rotation);
+		GetController()->GetPlayerViewPoint(Location, Rotation);
 
-	FVector Start = Location;
-	FVector End = Start + (Rotation.Vector() * 2000);
+		FVector Start = Location;
+		FVector End = Start + (Rotation.Vector() * 2000);
 
-	FCollisionQueryParams TraceParams;
-	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
+		FCollisionQueryParams TraceParams;
+		GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
 
-	DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 2.0f);
+		DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 2.0f);
+	}
+	//If the player isn't currently reloading and has hit 0 bullets left
+	if(Magazine == 0 && !bIsReloadingPrimary)
+	{
+		bIsReloadingPrimary = true;
+		GetWorldTimerManager().SetTimer(ReloadTimer, this, &ACyborg::ReloadPrimary, 2.5f, false);
+	}
+}
+
+//This function is called once reloading is done aka when the timer is completed
+void ACyborg::ReloadPrimary()
+{
+	//UE_LOG(LogTemp, Warning, TEXT("Reloading"));
+	Magazine = 25;
+	bIsReloadingPrimary = false;
+}
+
+void ACyborg::ReloadInput()
+{
+	//If no reload timer is active, start one
+	if(!GetWorldTimerManager().IsTimerActive(ReloadTimer))
+	{
+		bIsReloadingPrimary = true;
+		GetWorldTimerManager().SetTimer(ReloadTimer, this, &ACyborg::ReloadPrimary, 2.5f, false);
+	}
 }
 
 void ACyborg::SecondaryFire()
 {
+	if(!bIsReloadingSecondary)
+	{
+		bIsReloadingSecondary = true;
+		FireRocket();
+		GetWorldTimerManager().SetTimer(FireRocketTimer, this, &ACyborg::RocketReload, 6.f, false);
+	}
 	
 }
 
 void ACyborg::FireRocket()
 {
-	
+	FVector Location;
+	FRotator Rotation;
+
+	GetController()->GetPlayerViewPoint(Location, Rotation);
+
+	if (ProjectileClass != NULL)
+	{
+		FRotator SpawnRotation = Rotation;
+		FVector SpawnLocation = Location + (Rotation.Vector());
+		UWorld* const World = GetWorld();
+		if (World != NULL)
+		{
+			ARocket* Rocket = World->SpawnActor<ARocket>(ProjectileClass, SpawnLocation, SpawnRotation);
+			FVector NewVelocity = SpawnRotation.Vector() * 2000.0f;
+			Rocket->Velocity = FVector(NewVelocity);
+		}
+	}
 }
+
+void ACyborg::RocketReload()
+{
+	bIsReloadingSecondary = false;
+}
+
 
 void ACyborg::Interact()
 {
@@ -137,6 +197,7 @@ void ACyborg::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 	PlayerInputComponent->BindAction("PrimaryFire", IE_Pressed, this, &ACyborg::PrimaryFire);
 	PlayerInputComponent->BindAction("PrimaryFire", IE_Released, this, &ACyborg::PrimaryFireReleased);
+	PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &ACyborg::ReloadInput);
 	PlayerInputComponent->BindAction("SecondaryFire", IE_Pressed, this, &ACyborg::SecondaryFire);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACyborg::Interact);
 	

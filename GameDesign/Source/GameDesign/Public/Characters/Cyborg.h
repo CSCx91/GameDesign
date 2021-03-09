@@ -25,22 +25,42 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
 	UStaticMeshComponent* MeshComp;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
+	int Magazine = 25;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	bool bIsReloadingPrimary = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	bool bIsReloadingSecondary = false;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
+	TSubclassOf<class ARocket> ProjectileClass;
 	
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	//Basic movement functions
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void TurnAtRate(float Value);
 	void LookUpAtRate(float Value);
+
+	//Primary fire related functions
 	void PrimaryFire();
 	void PrimaryFireReleased();
 	void FireBullet();
-	
+	void ReloadPrimary();
+	void ReloadInput();
+	void ReloadDone();
+
+	//Secondary fire related functions
 	void SecondaryFire();
 	void FireRocket();
+	void RocketReload();
 	
 	void Interact();
 
@@ -50,7 +70,13 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	float BaseLookUpRate;
 
-	FTimerHandle MyHandle;
+	//Primary fire timers
+	FTimerHandle FireBulletTimer;
+	FTimerHandle ReloadTimer;
+
+	//Secondary fire timers
+	FTimerHandle FireRocketTimer;
+	
 
 public:	
 	// Called every frame
