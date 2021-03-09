@@ -31,15 +31,14 @@ void ARocket::Tick(float DeltaTime)
 
     FVector PlayerLocation;
     FRotator PlayerRotation;
-    
+
     FVector StartTrace = this->GetActorLocation();
     FVector EndTrace = (Velocity * DeltaTime) + StartTrace;
     PlayerController->GetPlayerViewPoint(PlayerLocation, PlayerRotation);
-    EndTrace.X += PlayerRotation.Roll;
-    EndTrace.Y += PlayerRotation.Yaw;
-    EndTrace.Z += PlayerRotation.Pitch;
-    
 
+    FVector Start = this->GetActorLocation();
+    FVector End = Start + (PlayerRotation.Vector() * 2000);
+    
     FCollisionQueryParams CollisionParams;
     CollisionParams.AddIgnoredActor(this);
 
@@ -64,11 +63,12 @@ void ARocket::Tick(float DeltaTime)
         DrawDebugLine(GetWorld(), StartTrace, EndTrace, FColor::Orange, true);
 
         SetActorLocation(EndTrace);
-
-        Velocity += FVector(0.f, 0.f, -200.f) * DeltaTime;
+        
+        //First testing it out without gravity
+        Velocity += FVector(0.f, 0.f, -400.f) * DeltaTime;
     }
 
-    if (BulletExpiry > 3)
+    if (BulletExpiry > 5)
     {
         Destroy();
     }

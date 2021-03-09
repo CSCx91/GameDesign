@@ -17,10 +17,9 @@ public:
 
     USceneComponent* RootComp;
 
-    UPROPERTY(EditAnywhere)
-        FVector Velocity = FVector(100.f);
-
     float BulletExpiry = 0;
+
+    FVector Velocity = FVector(200.0f);
     
     APlayerController* PlayerController; 
 
