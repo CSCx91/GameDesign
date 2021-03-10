@@ -29,14 +29,35 @@ ACyborg::ACyborg()
 void ACyborg::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	if (bUtilityCountDown != 0)
+	{
+		bIsUtilityReady = false;
+		bIsUtility = false;
+		GetWorldTimerManager().SetTimer(UtilityTimer, this, &ACyborg::UtilityCountDown, 1.f, true);
+	}
+	if (bUtilityCountDown == 0)
+	{
+		bUtilityTime = 10;
+		GetWorldTimerManager().ClearTimer(UtilityTimer);
+		bIsUtilityReady = true;
+	}
+	if (bIsUtility)
+	{
+		GetWorldTimerManager().SetTimer(UtilityTimer2, this, &ACyborg::UtilityCountDown, 1.f, true);
+	}
+	if (bUtilityTime == 0)
+	{
+		bIsUtility = false;
+		bUtilityCountDown = 10;
+		GetWorldTimerManager().ClearTimer(UtilityTimer2);
+	}
 }
 
 // Called every frame
 void ACyborg::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 	
 
 }
@@ -79,7 +100,7 @@ void ACyborg::LookUpAtRate(float Value)
 void ACyborg::PrimaryFire()
 {
 	FireBullet();
-	GetWorldTimerManager().SetTimer(FireBulletTimer, this, &ACyborg::FireBullet, 0.2f, true);
+	GetWorldTimerManager().SetTimer(FireBulletTimer, this, &ACyborg::FireBullet, PrimaryFireRate, true);
 }
 
 void ACyborg::PrimaryFireReleased()
@@ -139,7 +160,7 @@ void ACyborg::SecondaryFire()
 	{
 		bIsReloadingSecondary = true;
 		FireRocket();
-		GetWorldTimerManager().SetTimer(FireRocketTimer, this, &ACyborg::RocketReload, 6.f, false);
+		GetWorldTimerManager().SetTimer(FireRocketTimer, this, &ACyborg::RocketReload, RocketReloadTime, false);
 	}
 	
 }
@@ -168,6 +189,27 @@ void ACyborg::FireRocket()
 void ACyborg::RocketReload()
 {
 	bIsReloadingSecondary = false;
+}
+
+void ACyborg::Utility()
+{
+	if (bIsUtilityReady)
+	{
+		bIsUtility = true;
+		PrimaryFireRate /= 2;
+		RocketReloadTime /= 2;
+		GetCharacterMovement()->MaxWalkSpeed *= 1.20;
+	}
+}
+
+void ACyborg::UtilityCountDown()
+{
+	bUtilityCountDown -= 1;
+}
+
+void ACyborg::UtilityTimeControl()
+{
+	bUtilityTime -= 1;
 }
 
 
@@ -199,6 +241,7 @@ void ACyborg::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("PrimaryFire", IE_Released, this, &ACyborg::PrimaryFireReleased);
 	PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &ACyborg::ReloadInput);
 	PlayerInputComponent->BindAction("SecondaryFire", IE_Pressed, this, &ACyborg::SecondaryFire);
+	PlayerInputComponent->BindAction("Utility", IE_Pressed, this, &ACyborg::Utility);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACyborg::Interact);
 	
 	PlayerInputComponent->BindAxis("MoveForward",this, &ACyborg::MoveForward);

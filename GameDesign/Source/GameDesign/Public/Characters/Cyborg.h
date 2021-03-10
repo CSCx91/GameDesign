@@ -35,6 +35,18 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
 	bool bIsReloadingSecondary = false;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	bool bIsUtility = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	bool bIsUtilityReady = true;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	int bUtilityTime = 10;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	int bUtilityCountDown = 10;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
 	TSubclassOf<class ARocket> ProjectileClass;
 	
@@ -61,6 +73,10 @@ protected:
 	void SecondaryFire();
 	void FireRocket();
 	void RocketReload();
+
+	void Utility();
+	void UtilityCountDown();
+	void UtilityTimeControl();
 	
 	void Interact();
 
@@ -70,12 +86,22 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	float BaseLookUpRate;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
+	float PrimaryFireRate = 0.2f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
+	float RocketReloadTime = 6.f;
+
 	//Primary fire timers
 	FTimerHandle FireBulletTimer;
 	FTimerHandle ReloadTimer;
 
 	//Secondary fire timers
 	FTimerHandle FireRocketTimer;
+
+	//Ultility timers
+	FTimerHandle UtilityTimer;
+	FTimerHandle UtilityTimer2;
 	
 
 public:	
