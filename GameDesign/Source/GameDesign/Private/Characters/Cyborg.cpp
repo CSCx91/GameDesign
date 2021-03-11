@@ -4,6 +4,7 @@
 #include "Characters/Cyborg.h"
 #include "DrawDebugHelpers.h"
 #include "Characters/Rocket.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 ACyborg::ACyborg()
@@ -20,6 +21,8 @@ ACyborg::ACyborg()
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PlayerMesh"));
 	MeshComp->SetupAttachment(RootComponent);
 
+	CharMovComp = GetCharacterMovement();
+
 	BaseTurnRate = 45.0f;
 	BaseLookUpRate = 45.0f;
 	
@@ -29,28 +32,7 @@ ACyborg::ACyborg()
 void ACyborg::BeginPlay()
 {
 	Super::BeginPlay();
-	if (bUtilityCountDown != 0)
-	{
-		bIsUtilityReady = false;
-		bIsUtility = false;
-		GetWorldTimerManager().SetTimer(UtilityTimer, this, &ACyborg::UtilityCountDown, 1.f, true);
-	}
-	if (bUtilityCountDown == 0)
-	{
-		bUtilityTime = 10;
-		GetWorldTimerManager().ClearTimer(UtilityTimer);
-		bIsUtilityReady = true;
-	}
-	if (bIsUtility)
-	{
-		GetWorldTimerManager().SetTimer(UtilityTimer2, this, &ACyborg::UtilityCountDown, 1.f, true);
-	}
-	if (bUtilityTime == 0)
-	{
-		bIsUtility = false;
-		bUtilityCountDown = 10;
-		GetWorldTimerManager().ClearTimer(UtilityTimer2);
-	}
+	
 }
 
 // Called every frame
@@ -195,21 +177,31 @@ void ACyborg::Utility()
 {
 	if (bIsUtilityReady)
 	{
-		bIsUtility = true;
+		bIsUtilityActive = true;
 		PrimaryFireRate /= 2;
 		RocketReloadTime /= 2;
-		GetCharacterMovement()->MaxWalkSpeed *= 1.20;
+		CharMovComp->MaxWalkSpeed *= 1.20;
 	}
+
+	GetWorldTimerManager().SetTimer(UtilityTimer, this, &ACyborg::UtilityDone, 8.0f, false);
+	
 }
 
-void ACyborg::UtilityCountDown()
+void ACyborg::UtilityDone()
 {
-	bUtilityCountDown -= 1;
+	bIsUtilityReady = true;
+	PrimaryFireRate *= 2;
+	RocketReloadTime *= 2;
+	CharMovComp->MaxWalkSpeed /= 1.20f;
+	bIsUtilityOnCooldown = true;
+	bIsUtilityActive = false;
+	GetWorldTimerManager().SetTimer(UtilityCooldownTimer, this, &ACyborg::UtilityCooldown, 12.0f, false);
 }
 
-void ACyborg::UtilityTimeControl()
+void ACyborg::UtilityCooldown()
 {
-	bUtilityTime -= 1;
+	bIsUtilityReady = true;
+	bIsUtilityOnCooldown = false;
 }
 
 
