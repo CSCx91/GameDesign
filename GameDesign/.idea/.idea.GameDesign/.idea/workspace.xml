@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fdcfcae-335d-4018-9488-58568dbd3319" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Content/Assets/Blueprints/HUD/WB_RocketReload.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultInput.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultInput.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Blueprints/HUD/WB_PrimaryAmmo.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Blueprints/HUD/WB_PrimaryAmmo.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Cyborg/BP_Cyborg.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Cyborg/BP_Cyborg.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Main.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Rocket.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Rocket.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Cyborg.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Cyborg.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Rocket.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Rocket.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,6 +180,8 @@
       <workItem from="1615231056642" duration="2861000" />
       <workItem from="1615245190068" duration="2000000" />
       <workItem from="1615247287971" duration="14093000" />
+      <workItem from="1615421017511" duration="3340000" />
+      <workItem from="1615424636974" duration="296000" />
     </task>
     <servers />
   </component>

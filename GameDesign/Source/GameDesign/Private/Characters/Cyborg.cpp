@@ -4,6 +4,7 @@
 #include "Characters/Cyborg.h"
 #include "DrawDebugHelpers.h"
 #include "Characters/Rocket.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 ACyborg::ACyborg()
@@ -19,6 +20,8 @@ ACyborg::ACyborg()
 
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PlayerMesh"));
 	MeshComp->SetupAttachment(RootComponent);
+
+	CharMovComp = GetCharacterMovement();
 
 	BaseTurnRate = 45.0f;
 	BaseLookUpRate = 45.0f;
@@ -36,7 +39,7 @@ void ACyborg::BeginPlay()
 void ACyborg::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 	
 
 }
@@ -79,7 +82,7 @@ void ACyborg::LookUpAtRate(float Value)
 void ACyborg::PrimaryFire()
 {
 	FireBullet();
-	GetWorldTimerManager().SetTimer(FireBulletTimer, this, &ACyborg::FireBullet, 0.2f, true);
+	GetWorldTimerManager().SetTimer(FireBulletTimer, this, &ACyborg::FireBullet, PrimaryFireRate, true);
 }
 
 void ACyborg::PrimaryFireReleased()
@@ -139,7 +142,7 @@ void ACyborg::SecondaryFire()
 	{
 		bIsReloadingSecondary = true;
 		FireRocket();
-		GetWorldTimerManager().SetTimer(FireRocketTimer, this, &ACyborg::RocketReload, 6.f, false);
+		GetWorldTimerManager().SetTimer(FireRocketTimer, this, &ACyborg::RocketReload, RocketReloadTime, false);
 	}
 	
 }
@@ -168,6 +171,37 @@ void ACyborg::FireRocket()
 void ACyborg::RocketReload()
 {
 	bIsReloadingSecondary = false;
+}
+
+void ACyborg::Utility()
+{
+	if (bIsUtilityReady)
+	{
+		bIsUtilityActive = true;
+		PrimaryFireRate /= 2;
+		RocketReloadTime /= 2;
+		CharMovComp->MaxWalkSpeed *= 1.20;
+	}
+
+	GetWorldTimerManager().SetTimer(UtilityTimer, this, &ACyborg::UtilityDone, UtilityActiveTime, false);
+	
+}
+
+void ACyborg::UtilityDone()
+{
+	bIsUtilityReady = true;
+	PrimaryFireRate *= 2;
+	RocketReloadTime *= 2;
+	CharMovComp->MaxWalkSpeed /= 1.20f;
+	bIsUtilityOnCooldown = true;
+	bIsUtilityActive = false;
+	GetWorldTimerManager().SetTimer(UtilityCooldownTimer, this, &ACyborg::UtilityCooldown, UtilCooldown, false);
+}
+
+void ACyborg::UtilityCooldown()
+{
+	bIsUtilityReady = true;
+	bIsUtilityOnCooldown = false;
 }
 
 
@@ -199,6 +233,7 @@ void ACyborg::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("PrimaryFire", IE_Released, this, &ACyborg::PrimaryFireReleased);
 	PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &ACyborg::ReloadInput);
 	PlayerInputComponent->BindAction("SecondaryFire", IE_Pressed, this, &ACyborg::SecondaryFire);
+	PlayerInputComponent->BindAction("Utility", IE_Pressed, this, &ACyborg::Utility);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACyborg::Interact);
 	
 	PlayerInputComponent->BindAxis("MoveForward",this, &ACyborg::MoveForward);

@@ -35,6 +35,24 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
 	bool bIsReloadingSecondary = false;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	bool bIsUtilityActive = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	bool bIsUtilityReady = true;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	bool bIsUtilityOnCooldown = false;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	float UtilCooldown = 12.0f;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	float UtilityActiveTime= 8.0f;
+	
+
+	UCharacterMovementComponent* CharMovComp;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
 	TSubclassOf<class ARocket> ProjectileClass;
 	
@@ -61,6 +79,11 @@ protected:
 	void SecondaryFire();
 	void FireRocket();
 	void RocketReload();
+
+	void Utility();
+	void UtilityDone();
+	void UtilityCooldown();
+	
 	
 	void Interact();
 
@@ -70,12 +93,22 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	float BaseLookUpRate;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
+	float PrimaryFireRate = 0.2f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
+	float RocketReloadTime = 6.0f;
+
 	//Primary fire timers
 	FTimerHandle FireBulletTimer;
 	FTimerHandle ReloadTimer;
 
 	//Secondary fire timers
 	FTimerHandle FireRocketTimer;
+
+	//Utility timers
+	FTimerHandle UtilityTimer;
+	FTimerHandle UtilityCooldownTimer;
 	
 
 public:	
