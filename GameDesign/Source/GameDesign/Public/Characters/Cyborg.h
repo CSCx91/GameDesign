@@ -44,6 +44,11 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
 	bool bIsUtilityOnCooldown = false;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	float UtilCooldown = 12.0f;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	float UtilityActiveTime= 8.0f;
 	
 
 	UCharacterMovementComponent* CharMovComp;

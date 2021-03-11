@@ -183,7 +183,7 @@ void ACyborg::Utility()
 		CharMovComp->MaxWalkSpeed *= 1.20;
 	}
 
-	GetWorldTimerManager().SetTimer(UtilityTimer, this, &ACyborg::UtilityDone, 8.0f, false);
+	GetWorldTimerManager().SetTimer(UtilityTimer, this, &ACyborg::UtilityDone, UtilityActiveTime, false);
 	
 }
 
@@ -195,7 +195,7 @@ void ACyborg::UtilityDone()
 	CharMovComp->MaxWalkSpeed /= 1.20f;
 	bIsUtilityOnCooldown = true;
 	bIsUtilityActive = false;
-	GetWorldTimerManager().SetTimer(UtilityCooldownTimer, this, &ACyborg::UtilityCooldown, 12.0f, false);
+	GetWorldTimerManager().SetTimer(UtilityCooldownTimer, this, &ACyborg::UtilityCooldown, UtilCooldown, false);
 }
 
 void ACyborg::UtilityCooldown()
