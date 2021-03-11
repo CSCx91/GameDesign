@@ -25,6 +25,8 @@ ACyborg::ACyborg()
 
 	BaseTurnRate = 45.0f;
 	BaseLookUpRate = 45.0f;
+
+	Health = DefaultHealth;
 	
 }
 
@@ -189,7 +191,6 @@ void ACyborg::Utility()
 
 void ACyborg::UtilityDone()
 {
-	bIsUtilityReady = true;
 	PrimaryFireRate *= 2;
 	RocketReloadTime *= 2;
 	CharMovComp->MaxWalkSpeed /= 1.20f;
