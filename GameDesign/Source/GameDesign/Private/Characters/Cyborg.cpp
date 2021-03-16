@@ -232,12 +232,6 @@ float ACyborg::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, A
 	}
 
 	return DamageAmount;
-
-}
-
-void CausePainTo(AActor* Other)
-{
-
 }
 
 // Called to bind functionality to input

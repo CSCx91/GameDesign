@@ -55,11 +55,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	float Health;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
-	float DefaultHealth;
 	
-
 	UCharacterMovementComponent* CharMovComp;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
@@ -96,8 +92,8 @@ protected:
 	
 	void Interact();
 
+	//Overriding basic TakeDamage() to customize it, parameters are the same
 	float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
-	void CausePainTo(AActor* Other);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	float BaseTurnRate;
