@@ -25,6 +25,8 @@ ACyborg::ACyborg()
 
 	BaseTurnRate = 45.0f;
 	BaseLookUpRate = 45.0f;
+
+	Health = DefaultHealth;
 	
 }
 
@@ -189,7 +191,6 @@ void ACyborg::Utility()
 
 void ACyborg::UtilityDone()
 {
-	bIsUtilityReady = true;
 	PrimaryFireRate *= 2;
 	RocketReloadTime *= 2;
 	CharMovComp->MaxWalkSpeed /= 1.20f;
@@ -220,6 +221,17 @@ void ACyborg::Interact()
 	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
 
 	DrawDebugLine(GetWorld(), Start, End, FColor::Blue, false, 2.0f);
+}
+
+float ACyborg::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	Health -= DamageAmount;
+	if (Health <= 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Gonna Die!!"));
+	}
+
+	return DamageAmount;
 }
 
 // Called to bind functionality to input

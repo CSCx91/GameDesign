@@ -49,8 +49,13 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
 	float UtilityActiveTime= 8.0f;
-	
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
+	float DefaultHealth = 100.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
+	float Health;
+	
 	UCharacterMovementComponent* CharMovComp;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
@@ -73,19 +78,22 @@ protected:
 	void FireBullet();
 	void ReloadPrimary();
 	void ReloadInput();
-	void ReloadDone();
 
 	//Secondary fire related functions
 	void SecondaryFire();
 	void FireRocket();
 	void RocketReload();
 
+	//Utility related functions
 	void Utility();
 	void UtilityDone();
 	void UtilityCooldown();
-	
+
 	
 	void Interact();
+
+	//Overriding basic TakeDamage() to customize it, parameters are the same
+	float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	float BaseTurnRate;
