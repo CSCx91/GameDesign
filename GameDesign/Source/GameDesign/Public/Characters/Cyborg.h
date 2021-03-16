@@ -55,6 +55,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	float Health;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
+	float DefaultHealth;
 	
 
 	UCharacterMovementComponent* CharMovComp;
@@ -92,6 +95,9 @@ protected:
 
 	
 	void Interact();
+
+	float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+	void CausePainTo(AActor* Other);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	float BaseTurnRate;

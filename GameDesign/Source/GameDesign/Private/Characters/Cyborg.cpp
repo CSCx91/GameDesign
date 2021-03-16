@@ -223,6 +223,23 @@ void ACyborg::Interact()
 	DrawDebugLine(GetWorld(), Start, End, FColor::Blue, false, 2.0f);
 }
 
+float ACyborg::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	Health -= DamageAmount;
+	if (Health <= 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Gonna Die!!"));
+	}
+
+	return DamageAmount;
+
+}
+
+void CausePainTo(AActor* Other)
+{
+
+}
+
 // Called to bind functionality to input
 void ACyborg::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
