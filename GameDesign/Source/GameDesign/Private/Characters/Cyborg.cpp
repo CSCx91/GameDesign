@@ -80,6 +80,8 @@ void ACyborg::LookUpAtRate(float Value)
 	AddControllerPitchInput(Value * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
+
+
 //Will change to fire while held down
 void ACyborg::PrimaryFire()
 {
@@ -109,7 +111,7 @@ void ACyborg::FireBullet()
 
 		FCollisionQueryParams TraceParams;
 		GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
-
+		
 		DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 2.0f);
 	}
 	//If the player isn't currently reloading and has hit 0 bullets left
@@ -137,6 +139,8 @@ void ACyborg::ReloadInput()
 		GetWorldTimerManager().SetTimer(ReloadTimer, this, &ACyborg::ReloadPrimary, 2.5f, false);
 	}
 }
+
+
 
 void ACyborg::SecondaryFire()
 {
@@ -175,6 +179,8 @@ void ACyborg::RocketReload()
 	bIsReloadingSecondary = false;
 }
 
+
+
 void ACyborg::Utility()
 {
 	if (bIsUtilityReady)
@@ -204,6 +210,24 @@ void ACyborg::UtilityCooldown()
 	bIsUtilityReady = true;
 	bIsUtilityOnCooldown = false;
 }
+
+
+
+float ACyborg::AddXP()
+{
+	
+}
+
+float ACyborg::IncreaseLVL()
+{
+	
+}
+
+float ACyborg::IncreaseXPRequired()
+{
+	
+}
+
 
 
 void ACyborg::Interact()
