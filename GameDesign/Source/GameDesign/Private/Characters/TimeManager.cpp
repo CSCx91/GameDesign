@@ -16,7 +16,6 @@ ATimeManager::ATimeManager()
 void ATimeManager::BeginPlay()
 {
 	Super::BeginPlay();
-	//GetWorldTimerManager().SetTimer(MemberTimerHandle,this, &ATimeManager::).
 	
 }
 
