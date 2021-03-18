@@ -212,7 +212,7 @@ void ACyborg::UtilityCooldown()
 }
 
 
-
+/*
 float ACyborg::AddXP()
 {
 	
@@ -226,7 +226,7 @@ float ACyborg::IncreaseLVL()
 float ACyborg::IncreaseXPRequired()
 {
 	
-}
+}*/
 
 
 
