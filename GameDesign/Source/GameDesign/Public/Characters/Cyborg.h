@@ -64,6 +64,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	float XPRequiredToLVL = 100.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
+	float XPRequiredToLVLPercent = CurrentXP / XPRequiredToLVL;
 	
 	UCharacterMovementComponent* CharMovComp;
 
@@ -101,8 +104,8 @@ protected:
 	void Interact();
 
 	//XP and Leveling related functions
-	float IncreaseLVL();
-	float IncreaseXPRequired();
+	void IncreaseLVL();
+	void IncreaseXPRequired();
 	
 	//Overriding basic TakeDamage() to customize it, parameters are the same
 	float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
@@ -135,7 +138,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	float AddXP();
+	void AddXP(float xp);
 	
 
 	// Called to bind functionality to input

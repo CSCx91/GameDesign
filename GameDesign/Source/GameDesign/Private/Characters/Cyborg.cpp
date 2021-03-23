@@ -34,6 +34,8 @@ ACyborg::ACyborg()
 void ACyborg::BeginPlay()
 {
 	Super::BeginPlay();
+
+	
 	
 }
 
@@ -41,7 +43,6 @@ void ACyborg::BeginPlay()
 void ACyborg::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
 	
 
 }
@@ -212,21 +213,28 @@ void ACyborg::UtilityCooldown()
 }
 
 
-/*
-float ACyborg::AddXP()
+
+void ACyborg::AddXP(float xp)
 {
-	
+	CurrentXP += xp;
+	if (CurrentXP >= XPRequiredToLVL)
+	{
+		IncreaseLVL();
+	}
+
 }
 
-float ACyborg::IncreaseLVL()
+void ACyborg::IncreaseLVL()
 {
-	
+	CurrentXP = CurrentXP - XPRequiredToLVL;
+	CurrentLVL += 1.0;
+	IncreaseXPRequired();
 }
 
-float ACyborg::IncreaseXPRequired()
+void ACyborg::IncreaseXPRequired()
 {
-	
-}*/
+	XPRequiredToLVL *= 2;
+}
 
 
 
