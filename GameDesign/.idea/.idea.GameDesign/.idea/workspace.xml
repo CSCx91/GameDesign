@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fdcfcae-335d-4018-9488-58568dbd3319" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Main.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Cyborg.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Cyborg.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +27,8 @@
     <changedPaths>
       <option value="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Rocket.h" />
       <option value="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Rocket.cpp" />
-      <option value="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" />
       <option value="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Cyborg.h" />
+      <option value="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1oewx7Im7SNd0XAOCMU0CRZMIns" />
@@ -188,6 +185,8 @@
       <workItem from="1615481027357" duration="47000" />
       <workItem from="1615754125348" duration="639000" />
       <workItem from="1615907389626" duration="1323000" />
+      <workItem from="1616082883445" duration="1085000" />
+      <workItem from="1616109285276" duration="212000" />
     </task>
     <servers />
   </component>
