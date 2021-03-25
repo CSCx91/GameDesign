@@ -6,16 +6,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fdcfcae-335d-4018-9488-58568dbd3319" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/contentModel.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/indexLayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/riderModule.iml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Content/Assets/Blueprints/BP_Rocket.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Prefabs/Coin.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/A.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Blueprints/Coins/Coin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Blueprints/Coins/Coin.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Blueprints/HUD/WB_XP.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Blueprints/HUD/WB_XP.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Prefabs/Chest/Chest.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Prefabs/Chest/Chest.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/BP_Rocket.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Cyborg/BP_Cyborg.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Cyborg/BP_Cyborg.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Cyborg/beep.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Cyborg/beep.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/TimeManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/TimeManager.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/TimeManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/TimeManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/EnemyAI/SuicideEnemy/FindPlayer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/EnemyAI/SuicideEnemy/FindPlayer.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/EnemyAI/SuicideEnemy/SuicideEnemy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/EnemyAI/SuicideEnemy/SuicideEnemy.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/EnemyAI/SuicideEnemy/SuicideEnemy_BT.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/EnemyAI/SuicideEnemy/SuicideEnemy_BT.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Main.umap" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -306,6 +309,7 @@
       <workItem from="1615907389626" duration="1323000" />
       <workItem from="1616082883445" duration="1085000" />
       <workItem from="1616109285276" duration="212000" />
+      <workItem from="1616640686810" duration="794000" />
     </task>
     <servers />
   </component>
