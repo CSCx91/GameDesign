@@ -15,6 +15,7 @@
       <change beforePath="$PROJECT_DIR$/Content/Cyborg/beep.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Cyborg/beep.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/TimeManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/TimeManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/TimeManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/TimeManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +25,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
+      <option value="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Rocket.h" />
+      <option value="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Rocket.cpp" />
       <option value="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Cyborg.h" />
       <option value="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" />
       <option value="$PROJECT_DIR$/Source/GameDesign/Private/Characters/TimeManager.cpp" />
@@ -280,6 +291,21 @@
       <workItem from="1614272798693" duration="65000" />
       <workItem from="1614465004904" duration="1847000" />
       <workItem from="1616106442076" duration="265000" />
+      <workItem from="1614646058840" duration="5090000" />
+      <workItem from="1614702964682" duration="1525000" />
+      <workItem from="1614876748270" duration="1376000" />
+      <workItem from="1615230638965" duration="207000" />
+      <workItem from="1615231056642" duration="2861000" />
+      <workItem from="1615245190068" duration="2000000" />
+      <workItem from="1615247287971" duration="14093000" />
+      <workItem from="1615421017511" duration="3340000" />
+      <workItem from="1615424636974" duration="891000" />
+      <workItem from="1615479790067" duration="1153000" />
+      <workItem from="1615481027357" duration="47000" />
+      <workItem from="1615754125348" duration="639000" />
+      <workItem from="1615907389626" duration="1323000" />
+      <workItem from="1616082883445" duration="1085000" />
+      <workItem from="1616109285276" duration="212000" />
     </task>
     <servers />
   </component>
