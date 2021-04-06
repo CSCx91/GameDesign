@@ -50,6 +50,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
 	float UtilityActiveTime= 8.0f;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	bool isMovingForward = false;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	float DefaultHealth = 100.0f;
 
@@ -100,6 +103,10 @@ protected:
 	void Utility();
 	void UtilityDone();
 	void UtilityCooldown();
+
+	//Sprint
+	void Sprint();
+	void StopSprint();
 
 	void Interact();
 

@@ -212,6 +212,21 @@ void ACyborg::UtilityCooldown()
 	bIsUtilityOnCooldown = false;
 }
 
+void ACyborg::Sprint()
+{
+	int walkSpeed = FVector::DotProduct(GetVelocity(), GetActorRotation().Vector());
+	if (walkSpeed == 0) {
+		CharMovComp->MaxWalkSpeed *= 1.50f;
+	}
+	if (walkSpeed == 0) {
+		StopSprint();
+	}
+}
+
+void ACyborg::StopSprint()
+{
+	CharMovComp->MaxWalkSpeed /= 1.50f;
+}
 
 
 void ACyborg::AddXP(float xp)
@@ -278,6 +293,7 @@ void ACyborg::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &ACyborg::ReloadInput);
 	PlayerInputComponent->BindAction("SecondaryFire", IE_Pressed, this, &ACyborg::SecondaryFire);
 	PlayerInputComponent->BindAction("Utility", IE_Pressed, this, &ACyborg::Utility);
+	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ACyborg::Sprint);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACyborg::Interact);
 	
 	PlayerInputComponent->BindAxis("MoveForward",this, &ACyborg::MoveForward);
