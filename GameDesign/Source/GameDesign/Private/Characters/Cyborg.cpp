@@ -187,12 +187,14 @@ void ACyborg::Utility()
 	if (bIsUtilityReady)
 	{
 		bIsUtilityActive = true;
+		bIsUtilityReady = false;
 		PrimaryFireRate /= 2;
 		RocketReloadTime /= 2;
 		CharMovComp->MaxWalkSpeed *= 1.20;
 	}
 
 	GetWorldTimerManager().SetTimer(UtilityTimer, this, &ACyborg::UtilityDone, UtilityActiveTime, false);
+
 	
 }
 
@@ -214,13 +216,7 @@ void ACyborg::UtilityCooldown()
 
 void ACyborg::Sprint()
 {
-	int walkSpeed = FVector::DotProduct(GetVelocity(), GetActorRotation().Vector());
-	if (walkSpeed == 0) {
-		CharMovComp->MaxWalkSpeed *= 1.50f;
-	}
-	if (walkSpeed == 0) {
-		StopSprint();
-	}
+	CharMovComp->MaxWalkSpeed *= 1.50f;
 }
 
 void ACyborg::StopSprint()
@@ -294,6 +290,7 @@ void ACyborg::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("SecondaryFire", IE_Pressed, this, &ACyborg::SecondaryFire);
 	PlayerInputComponent->BindAction("Utility", IE_Pressed, this, &ACyborg::Utility);
 	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ACyborg::Sprint);
+	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &ACyborg::StopSprint);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACyborg::Interact);
 	
 	PlayerInputComponent->BindAxis("MoveForward",this, &ACyborg::MoveForward);
