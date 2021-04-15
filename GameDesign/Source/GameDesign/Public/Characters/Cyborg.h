@@ -57,6 +57,9 @@ public:
 	float DefaultHealth = 100.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
+	float MaxHealth = 100.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	float Health;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
