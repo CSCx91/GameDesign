@@ -267,7 +267,8 @@ void ACyborg::Interact()
 	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
 
 	DrawDebugLine(GetWorld(), Start, End, FColor::Blue, false, 2.0f);
-	if(Hit.GetActor() && Hit.GetActor()->ActorHasTag("Item"))
+		
+	if(Hit.GetActor() && Hit.GetActor()->ActorHasTag(TEXT("Item")))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Found item!"))
 		InventoryComp->AddItem(Hit.GetActor());
