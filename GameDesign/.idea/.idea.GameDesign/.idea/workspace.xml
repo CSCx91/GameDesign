@@ -6,10 +6,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7fdcfcae-335d-4018-9488-58568dbd3319" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Content/Assets/Blueprints/Items/BoosterPack.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Blueprints/Items/BP_DoubleJumpItem.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Blueprints/Items/BP_DoubleJumpItem.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Cyborg/BP_Cyborg.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Cyborg/BP_Cyborg.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Maps/Main.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/Main.umap" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Inventory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Inventory.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Cyborg.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Cyborg.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Inventory.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Inventory.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +31,7 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Source/GameDesign/Public/Characters/Inventory.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/GameDesign/Public/Characters/Rocket.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../../Program Files/Epic Games/UE_4.26/Engine/Source/Runtime/Core/Public/Logging/LogMacros.h" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -37,10 +41,10 @@
       <option value="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Rocket.cpp" />
       <option value="$PROJECT_DIR$/Source/GameDesign/Private/Characters/TimeManager.cpp" />
       <option value="$PROJECT_DIR$/Source/GameDesign/Public/Characters/TimeManager.h" />
+      <option value="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" />
+      <option value="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Cyborg.h" />
       <option value="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Inventory.h" />
       <option value="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Inventory.cpp" />
-      <option value="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Cyborg.h" />
-      <option value="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1oewx7Im7SNd0XAOCMU0CRZMIns" />
@@ -317,6 +321,8 @@
       <workItem from="1619058048815" duration="4443000" />
       <workItem from="1619104342255" duration="4374000" />
       <workItem from="1619112670144" duration="1755000" />
+      <workItem from="1619120333477" duration="1698000" />
+      <workItem from="1619122066830" duration="2015000" />
     </task>
     <servers />
   </component>

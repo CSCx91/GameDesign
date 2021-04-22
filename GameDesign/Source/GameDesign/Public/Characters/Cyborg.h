@@ -4,11 +4,13 @@
 
 #include "CoreMinimal.h"
 
-#include "Inventory.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Cyborg.generated.h"
+
+class UInventory;
+
 
 UCLASS()
 class GAMEDESIGN_API ACyborg : public ACharacter
@@ -18,6 +20,7 @@ class GAMEDESIGN_API ACyborg : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ACyborg();
+	
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 	USpringArmComponent* SpringArmComp;

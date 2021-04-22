@@ -3,9 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-
-#include <string>
-
+#include "Cyborg.h"
 #include "Components/ActorComponent.h"
 #include "Inventory.generated.h"
 
@@ -25,8 +23,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void AddItem(AActor* Item);
 
+	void CheckItemAdded(AActor* Item);
+
 	//Will implement later if we add scrapping mechanics
 	void RemoveItem();
+	
+	void AddBoosterPack();
+
+	ACyborg* Cyborg;
 
 protected:
 	// Called when the game starts

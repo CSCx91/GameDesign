@@ -273,7 +273,6 @@ void ACyborg::Interact()
 		UE_LOG(LogTemp, Warning, TEXT("Found item!"))
 		InventoryComp->AddItem(Hit.GetActor());
 	}
-	
 }
 
 float ACyborg::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)

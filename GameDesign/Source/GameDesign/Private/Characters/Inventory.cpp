@@ -3,6 +3,9 @@
 
 #include "Characters/Inventory.h"
 
+#include "Items/DoubleJump.h"
+
+
 // Sets default values for this component's properties
 UInventory::UInventory()
 {
@@ -10,6 +13,7 @@ UInventory::UInventory()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
+	Cyborg = Cast<ACyborg>(GetOwner());
 	
 }
 
@@ -50,5 +54,25 @@ void UInventory::AddItem(AActor* Item)
 	{
 		Items.Add(ItemName, 1);
 	}
+
+	CheckItemAdded(Item);
+	
+	Item->Destroy();
 }
+
+void UInventory::CheckItemAdded(AActor* Item)
+{
+	if(Item->IsA(ADoubleJump::StaticClass()))
+	{
+		AddBoosterPack();
+	}
+	
+}
+
+
+void UInventory::AddBoosterPack()
+{
+	Cyborg->JumpMaxCount++;
+}
+
 
