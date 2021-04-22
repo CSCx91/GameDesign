@@ -39,7 +39,9 @@ void UInventory::ToggleInventory()
 
 void UInventory::AddItem(AActor* Item)
 {
+	
 	const FString ItemName = Item->GetName();
+	UE_LOG(LogTemp, Warning, TEXT("Adding the item"))
 	if(Items.Contains(ItemName))
 	{
 		Items[ItemName]++;

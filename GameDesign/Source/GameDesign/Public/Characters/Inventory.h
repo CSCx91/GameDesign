@@ -22,6 +22,7 @@ public:
 	//Toggle HUD
 	void ToggleInventory();
 	
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void AddItem(AActor* Item);
 
 	//Will implement later if we add scrapping mechanics

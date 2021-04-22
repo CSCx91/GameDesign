@@ -3,6 +3,7 @@
 
 #include "Characters/Cyborg.h"
 #include "DrawDebugHelpers.h"
+#include "Characters/Inventory.h"
 #include "Characters/Rocket.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -22,6 +23,8 @@ ACyborg::ACyborg()
 	MeshComp->SetupAttachment(RootComponent);
 
 	CharMovComp = GetCharacterMovement();
+
+	InventoryComp = CreateDefaultSubobject<UInventory>(TEXT("Inventory"));
 
 	BaseTurnRate = 45.0f;
 	BaseLookUpRate = 45.0f;
@@ -264,6 +267,13 @@ void ACyborg::Interact()
 	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
 
 	DrawDebugLine(GetWorld(), Start, End, FColor::Blue, false, 2.0f);
+
+	if(Hit.GetActor() && Hit.GetActor()->ActorHasTag("Item"))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Found item!"))
+		InventoryComp->AddItem(Hit.GetActor());
+	}
+	
 }
 
 float ACyborg::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
