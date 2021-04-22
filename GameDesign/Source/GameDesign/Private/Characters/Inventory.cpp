@@ -10,7 +10,7 @@ UInventory::UInventory()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+	
 }
 
 
@@ -19,7 +19,7 @@ void UInventory::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	
 	
 }
 
@@ -29,6 +29,24 @@ void UInventory::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	
+}
+
+void UInventory::ToggleInventory()
+{
+	
+}
+
+void UInventory::AddItem(AActor* Item)
+{
+	const FString ItemName = Item->GetName();
+	if(Items.Contains(ItemName))
+	{
+		Items[ItemName]++;
+	}
+	else
+	{
+		Items.Add(ItemName, 1);
+	}
 }
 

@@ -5,7 +5,11 @@
     <projectFile>Intermediate/ProjectFiles/UE4.vcxproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7fdcfcae-335d-4018-9488-58568dbd3319" name="Default Changelist" comment="" />
+    <list default="true" id="7fdcfcae-335d-4018-9488-58568dbd3319" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.GameDesign/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Inventory.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Inventory.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Inventory.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Inventory.h" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,6 +37,8 @@
       <option value="$PROJECT_DIR$/Source/GameDesign/Public/Characters/TimeManager.h" />
       <option value="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Cyborg.cpp" />
       <option value="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Cyborg.h" />
+      <option value="$PROJECT_DIR$/Source/GameDesign/Public/Characters/Inventory.h" />
+      <option value="$PROJECT_DIR$/Source/GameDesign/Private/Characters/Inventory.cpp" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1oewx7Im7SNd0XAOCMU0CRZMIns" />
@@ -305,6 +311,8 @@
       <workItem from="1618326844305" duration="1962000" />
       <workItem from="1618500404952" duration="65000" />
       <workItem from="1618500505052" duration="1827000" />
+      <workItem from="1618933398151" duration="1217000" />
+      <workItem from="1619058048815" duration="1485000" />
     </task>
     <servers />
   </component>
