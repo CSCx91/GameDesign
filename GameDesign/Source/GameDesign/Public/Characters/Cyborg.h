@@ -81,6 +81,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
 	UInventory* InventoryComp;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
+	int InteractDistance = 1000;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
 	TSubclassOf<class ARocket> ProjectileClass;
 	

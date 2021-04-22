@@ -261,13 +261,12 @@ void ACyborg::Interact()
 	GetController()->GetPlayerViewPoint(Location, Rotation);
 
 	FVector Start = Location;
-	FVector End = Start + (Rotation.Vector() * 700);
+	FVector End = Start + (Rotation.Vector() * InteractDistance);
     
 	FCollisionQueryParams TraceParams;
 	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
 
 	DrawDebugLine(GetWorld(), Start, End, FColor::Blue, false, 2.0f);
-
 	if(Hit.GetActor() && Hit.GetActor()->ActorHasTag("Item"))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Found item!"))
