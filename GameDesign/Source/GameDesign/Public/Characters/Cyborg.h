@@ -3,10 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Cyborg.generated.h"
+
+class UInventory;
+
 
 UCLASS()
 class GAMEDESIGN_API ACyborg : public ACharacter
@@ -16,6 +20,7 @@ class GAMEDESIGN_API ACyborg : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ACyborg();
+	
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
 	USpringArmComponent* SpringArmComp;
@@ -50,8 +55,14 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
 	float UtilityActiveTime= 8.0f;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	bool isMovingForward = false;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	float DefaultHealth = 100.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
+	float MaxHealth = 100.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	float Health;
@@ -63,6 +74,9 @@ public:
 	float CurrentLVL = 1.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
+	float DefaultMovementSpeed = 600.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	float XPRequiredToLVL = 100.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
@@ -70,8 +84,16 @@ public:
 	
 	UCharacterMovementComponent* CharMovComp;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
+	UInventory* InventoryComp;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
+	int InteractDistance = 1000;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
 	TSubclassOf<class ARocket> ProjectileClass;
+
+	
 	
 
 protected:
@@ -100,6 +122,10 @@ protected:
 	void Utility();
 	void UtilityDone();
 	void UtilityCooldown();
+
+	//Sprint
+	void Sprint();
+	void StopSprint();
 
 	void Interact();
 
@@ -139,6 +165,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	void AddXP(float xp);
+
 	
 
 	// Called to bind functionality to input

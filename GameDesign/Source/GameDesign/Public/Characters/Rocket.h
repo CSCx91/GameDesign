@@ -19,15 +19,26 @@ public:
 
     float BulletExpiry = 0;
 
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+    bool HitObject = false;
+
     FVector Velocity = FVector(200.0f);
     
-    APlayerController* PlayerController; 
+    APlayerController* PlayerController;
+
+    UPROPERTY(EditDefaultsOnly, Category = "Spawning")
+    TSubclassOf<AActor> ActorToSpawn;
 
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
 
+    void DestroySelf();
+
 public:
     // Called every frame
     virtual void Tick(float DeltaTime) override;
+
+    UFUNCTION()
+    void SpawnObject(FVector Loc, FRotator Rot);
 };

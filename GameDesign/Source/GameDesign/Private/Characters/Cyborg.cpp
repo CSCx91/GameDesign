@@ -3,6 +3,7 @@
 
 #include "Characters/Cyborg.h"
 #include "DrawDebugHelpers.h"
+#include "Characters/Inventory.h"
 #include "Characters/Rocket.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -22,6 +23,8 @@ ACyborg::ACyborg()
 	MeshComp->SetupAttachment(RootComponent);
 
 	CharMovComp = GetCharacterMovement();
+
+	InventoryComp = CreateDefaultSubobject<UInventory>(TEXT("Inventory"));
 
 	BaseTurnRate = 45.0f;
 	BaseLookUpRate = 45.0f;
@@ -98,7 +101,7 @@ void ACyborg::PrimaryFireReleased()
 void ACyborg::FireBullet()
 {
 	//As long as the player continues to hold fire and has bullets, fire them
-	if(Magazine >= 1)
+	if(Magazine >= 1 && !bIsReloadingPrimary)
 	{
 		Magazine--;
 		FVector Location;
@@ -136,6 +139,9 @@ void ACyborg::ReloadInput()
 	//If no reload timer is active, start one
 	if(!GetWorldTimerManager().IsTimerActive(ReloadTimer))
 	{
+		if(GetWorldTimerManager().IsTimerActive(FireBulletTimer))
+			GetWorldTimerManager().ClearTimer(FireBulletTimer);
+		
 		bIsReloadingPrimary = true;
 		GetWorldTimerManager().SetTimer(ReloadTimer, this, &ACyborg::ReloadPrimary, 2.5f, false);
 	}
@@ -187,12 +193,14 @@ void ACyborg::Utility()
 	if (bIsUtilityReady)
 	{
 		bIsUtilityActive = true;
+		bIsUtilityReady = false;
 		PrimaryFireRate /= 2;
 		RocketReloadTime /= 2;
 		CharMovComp->MaxWalkSpeed *= 1.20;
 	}
 
 	GetWorldTimerManager().SetTimer(UtilityTimer, this, &ACyborg::UtilityDone, UtilityActiveTime, false);
+
 	
 }
 
@@ -212,6 +220,15 @@ void ACyborg::UtilityCooldown()
 	bIsUtilityOnCooldown = false;
 }
 
+void ACyborg::Sprint()
+{
+	CharMovComp->MaxWalkSpeed *= 1.50f;
+}
+
+void ACyborg::StopSprint()
+{
+	CharMovComp->MaxWalkSpeed /= 1.50f;
+}
 
 
 void ACyborg::AddXP(float xp)
@@ -247,12 +264,18 @@ void ACyborg::Interact()
 	GetController()->GetPlayerViewPoint(Location, Rotation);
 
 	FVector Start = Location;
-	FVector End = Start + (Rotation.Vector() * 700);
+	FVector End = Start + (Rotation.Vector() * InteractDistance);
     
 	FCollisionQueryParams TraceParams;
 	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
 
 	DrawDebugLine(GetWorld(), Start, End, FColor::Blue, false, 2.0f);
+		
+	if(Hit.GetActor() && Hit.GetActor()->ActorHasTag(TEXT("Item")))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Found item!"))
+		InventoryComp->AddItem(Hit.GetActor());
+	}
 }
 
 float ACyborg::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
@@ -266,6 +289,9 @@ float ACyborg::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, A
 	return DamageAmount;
 }
 
+
+
+
 // Called to bind functionality to input
 void ACyborg::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -278,6 +304,8 @@ void ACyborg::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &ACyborg::ReloadInput);
 	PlayerInputComponent->BindAction("SecondaryFire", IE_Pressed, this, &ACyborg::SecondaryFire);
 	PlayerInputComponent->BindAction("Utility", IE_Pressed, this, &ACyborg::Utility);
+	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &ACyborg::Sprint);
+	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &ACyborg::StopSprint);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ACyborg::Interact);
 	
 	PlayerInputComponent->BindAxis("MoveForward",this, &ACyborg::MoveForward);
