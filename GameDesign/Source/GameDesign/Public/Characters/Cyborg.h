@@ -74,6 +74,9 @@ public:
 	float CurrentLVL = 1.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
+	float DefaultMovementSpeed = 600.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	float XPRequiredToLVL = 100.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
@@ -89,6 +92,8 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
 	TSubclassOf<class ARocket> ProjectileClass;
+
+	
 	
 
 protected:
@@ -160,6 +165,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	void AddXP(float xp);
+
 	
 
 	// Called to bind functionality to input

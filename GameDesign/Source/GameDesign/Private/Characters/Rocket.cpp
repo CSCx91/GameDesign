@@ -43,19 +43,21 @@ void ARocket::Tick(float DeltaTime)
     CollisionParams.AddIgnoredActor(this);
 
     BulletExpiry += DeltaTime;
-    if (GetWorld()->LineTraceSingleByChannel(HitResult, StartTrace, EndTrace, ECC_Destructible, CollisionParams))
+    if (GetWorld()->LineTraceSingleByChannel(HitResult, StartTrace, EndTrace, ECC_Visibility, CollisionParams))
     {
         DrawDebugLine(GetWorld(), HitResult.ImpactPoint, FVector(10.f), FColor::Red, true);
+        UWorld* const World = GetWorld();
         if (HitResult.GetActor())
         {
             DrawDebugSolidBox(GetWorld(), HitResult.ImpactPoint, FVector(10.f), FColor::Blue, true);
+            UE_LOG(LogTemp, Warning, TEXT("%s"), *HitResult.GetActor()->GetName());
+            HitObject = true;
+            
         }
         else
         {
-            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::Printf(TEXT("Fire")));
+            //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::Printf(TEXT("Rocket hit nothing")));
         }
-
-        Destroy();
     }
     else
     {
@@ -72,4 +74,19 @@ void ARocket::Tick(float DeltaTime)
     {
         Destroy();
     }
+
+    
 }
+
+void ARocket::SpawnObject(FVector Loc, FRotator Rot)
+{
+    FActorSpawnParameters SpawnParams;
+    AActor* SpawnedActorRef = GetWorld()->SpawnActor<AActor>(ActorToSpawn, Loc, Rot, SpawnParams);
+	
+}
+
+void ARocket::DestroySelf()
+{
+    Destroy();
+}
+

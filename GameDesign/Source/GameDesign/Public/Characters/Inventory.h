@@ -30,6 +30,8 @@ public:
 	
 	void AddBoosterPack();
 
+	void AddMaglevPass();
+
 	ACyborg* Cyborg;
 
 protected:

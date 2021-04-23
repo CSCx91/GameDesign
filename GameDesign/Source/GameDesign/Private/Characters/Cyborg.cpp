@@ -101,7 +101,7 @@ void ACyborg::PrimaryFireReleased()
 void ACyborg::FireBullet()
 {
 	//As long as the player continues to hold fire and has bullets, fire them
-	if(Magazine >= 1)
+	if(Magazine >= 1 && !bIsReloadingPrimary)
 	{
 		Magazine--;
 		FVector Location;
@@ -139,6 +139,9 @@ void ACyborg::ReloadInput()
 	//If no reload timer is active, start one
 	if(!GetWorldTimerManager().IsTimerActive(ReloadTimer))
 	{
+		if(GetWorldTimerManager().IsTimerActive(FireBulletTimer))
+			GetWorldTimerManager().ClearTimer(FireBulletTimer);
+		
 		bIsReloadingPrimary = true;
 		GetWorldTimerManager().SetTimer(ReloadTimer, this, &ACyborg::ReloadPrimary, 2.5f, false);
 	}
@@ -285,6 +288,9 @@ float ACyborg::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, A
 
 	return DamageAmount;
 }
+
+
+
 
 // Called to bind functionality to input
 void ACyborg::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

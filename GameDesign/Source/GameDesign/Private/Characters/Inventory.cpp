@@ -3,7 +3,10 @@
 
 #include "Characters/Inventory.h"
 
+
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Items/DoubleJump.h"
+#include "Items/MaglevPass.h"
 
 
 // Sets default values for this component's properties
@@ -66,8 +69,19 @@ void UInventory::CheckItemAdded(AActor* Item)
 	{
 		AddBoosterPack();
 	}
+	if(Item->IsA(AMaglevPass::StaticClass()))
+	{
+		AddMaglevPass();
+	}
 	
 }
+
+void UInventory::AddMaglevPass()
+{
+	float NewAddedSpeed = (Cyborg->DefaultMovementSpeed * 0.15f);
+	Cyborg->CharMovComp->MaxWalkSpeed += NewAddedSpeed;
+}
+
 
 
 void UInventory::AddBoosterPack()
