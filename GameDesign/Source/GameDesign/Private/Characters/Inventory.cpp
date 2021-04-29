@@ -90,4 +90,10 @@ void UInventory::AddBoosterPack()
 	Cyborg->JumpMaxCount++;
 }
 
+void UInventory::AddGunPolish()
+{
+	//Use base primary fire rate, decrease 
+}
+
+
 

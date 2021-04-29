@@ -32,6 +32,8 @@ public:
 
 	void AddMaglevPass();
 
+	void AddGunPolish();
+
 	ACyborg* Cyborg;
 
 protected:
