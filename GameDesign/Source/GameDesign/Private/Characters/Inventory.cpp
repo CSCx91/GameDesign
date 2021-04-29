@@ -7,6 +7,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Items/DoubleJump.h"
 #include "Items/MaglevPass.h"
+#include "Items/GunPolish.h"
 
 
 // Sets default values for this component's properties
@@ -73,6 +74,11 @@ void UInventory::CheckItemAdded(AActor* Item)
 	{
 		AddMaglevPass();
 	}
+
+	if (Item->IsA(AGunPolish::StaticClass()))
+	{
+		AddGunPolish();
+	}
 	
 }
 
@@ -89,5 +95,12 @@ void UInventory::AddBoosterPack()
 {
 	Cyborg->JumpMaxCount++;
 }
+
+void UInventory::AddGunPolish()
+{
+	float DecreaseFireRate = Cyborg->BasePrimaryFireRate * 0.12f;
+	Cyborg->PrimaryFireRate -= DecreaseFireRate;
+}
+
 
 

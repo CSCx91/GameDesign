@@ -93,6 +93,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	float MovementSpeedWithItems = 600.0f;
 
+	
+
 
 	//Component variables
 
@@ -116,6 +118,13 @@ public:
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
 	TSubclassOf<class ARocket> ProjectileClass;
+
+	//Fire Rate variable
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
+	float BasePrimaryFireRate = 0.2f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
+	float PrimaryFireRate = 0.2f;
 
 	
 	
@@ -171,10 +180,9 @@ protected:
 	//Primary variables
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
-	float PrimaryFireRate = 0.2f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
 	float PrimaryFireDamage = 15.0f;
+
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
 	float PrimaryFireRange = 3000.0f;
