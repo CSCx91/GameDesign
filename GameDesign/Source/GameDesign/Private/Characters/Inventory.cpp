@@ -98,8 +98,8 @@ void UInventory::AddBoosterPack()
 
 void UInventory::AddGunPolish()
 {
-	//Use base primary fire rate, decrease 
-	Cyborg->PrimaryFireRate *= 0.88f;
+	float DecreaseFireRate = Cyborg->BasePrimaryFireRate * 0.12f;
+	Cyborg->PrimaryFireRate -= DecreaseFireRate;
 }
 
 
