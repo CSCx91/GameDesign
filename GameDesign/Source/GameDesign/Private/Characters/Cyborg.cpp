@@ -2,9 +2,13 @@
 
 
 #include "Characters/Cyborg.h"
+
+#include <string>
+
 #include "DrawDebugHelpers.h"
 #include "Characters/Inventory.h"
 #include "Characters/Rocket.h"
+#include "Characters/SpiderBomber.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
@@ -46,7 +50,6 @@ void ACyborg::BeginPlay()
 void ACyborg::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
 
 }
 
@@ -84,9 +87,30 @@ void ACyborg::LookUpAtRate(float Value)
 	AddControllerPitchInput(Value * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
+std::tuple<bool, AActor*> ACyborg::TraceForward(float Distance)
+{
+	FVector Location;
+	FRotator Rotation;
+	FHitResult Hit;
+
+	GetController()->GetPlayerViewPoint(Location, Rotation);
+
+	FVector Start = Location;
+	FVector End = Start + (Rotation.Vector() * Distance);
+
+	FCollisionQueryParams TraceParams;
+	bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
+
+	DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 2.0f);
+	
+	if(bHit)
+		return {bHit, Hit.GetActor()};
+
+	return {bHit, nullptr};
+}
 
 
-//Will change to fire while held down
+
 void ACyborg::PrimaryFire()
 {
 	FireBullet();
@@ -104,19 +128,15 @@ void ACyborg::FireBullet()
 	if(Magazine >= 1 && !bIsReloadingPrimary)
 	{
 		Magazine--;
-		FVector Location;
-		FRotator Rotation;
-		FHitResult Hit;
 
-		GetController()->GetPlayerViewPoint(Location, Rotation);
-
-		FVector Start = Location;
-		FVector End = Start + (Rotation.Vector() * 2000);
-
-		FCollisionQueryParams TraceParams;
-		GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
+		std::tuple<bool, AActor*> BulletTrace = TraceForward(PrimaryFireRange);
+		bool bHit = std::get<0>(BulletTrace);
+		AActor* HitActor = std::get<1>(BulletTrace);
 		
-		DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 2.0f);
+		if(bHit && HitActor)
+		{
+		    HitActor->TakeDamage(PrimaryFireDamage, FDamageEvent(), GetController(), this);
+		}
 	}
 	//If the player isn't currently reloading and has hit 0 bullets left
 	if(Magazine == 0 && !bIsReloadingPrimary)
@@ -146,7 +166,6 @@ void ACyborg::ReloadInput()
 		GetWorldTimerManager().SetTimer(ReloadTimer, this, &ACyborg::ReloadPrimary, 2.5f, false);
 	}
 }
-
 
 
 void ACyborg::SecondaryFire()
@@ -196,7 +215,7 @@ void ACyborg::Utility()
 		bIsUtilityReady = false;
 		PrimaryFireRate /= 2;
 		RocketReloadTime /= 2;
-		CharMovComp->MaxWalkSpeed *= 1.20;
+		CharMovComp->MaxWalkSpeed += (MovementSpeedWithItems * 0.20);
 	}
 
 	GetWorldTimerManager().SetTimer(UtilityTimer, this, &ACyborg::UtilityDone, UtilityActiveTime, false);
@@ -208,7 +227,7 @@ void ACyborg::UtilityDone()
 {
 	PrimaryFireRate *= 2;
 	RocketReloadTime *= 2;
-	CharMovComp->MaxWalkSpeed /= 1.20f;
+	CharMovComp->MaxWalkSpeed -= (MovementSpeedWithItems * 0.20f);
 	bIsUtilityOnCooldown = true;
 	bIsUtilityActive = false;
 	GetWorldTimerManager().SetTimer(UtilityCooldownTimer, this, &ACyborg::UtilityCooldown, UtilCooldown, false);
@@ -257,39 +276,19 @@ void ACyborg::IncreaseXPRequired()
 
 void ACyborg::Interact()
 {
-	FVector Location;
-	FRotator Rotation;
-	FHitResult Hit;
-
-	GetController()->GetPlayerViewPoint(Location, Rotation);
-
-	FVector Start = Location;
-	FVector End = Start + (Rotation.Vector() * InteractDistance);
-    
-	FCollisionQueryParams TraceParams;
-	GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Visibility, TraceParams);
-
-	DrawDebugLine(GetWorld(), Start, End, FColor::Blue, false, 2.0f);
-		
-	if(Hit.GetActor() && Hit.GetActor()->ActorHasTag(TEXT("Item")))
+	std::tuple<bool, AActor*> InteractTrace = TraceForward(InteractDistance);
+	bool bHit = std::get<0>(InteractTrace);
+	AActor* HitActor = std::get<1>(InteractTrace);
+	
+	if(bHit && HitActor)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Found item!"))
-		InventoryComp->AddItem(Hit.GetActor());
+		if(HitActor->ActorHasTag("Item"))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Found item!"))
+			InventoryComp->AddItem(HitActor);
+		}
 	}
 }
-
-float ACyborg::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
-{
-	Health -= DamageAmount;
-	if (Health <= 0)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Gonna Die!!"));
-	}
-
-	return DamageAmount;
-}
-
-
 
 
 // Called to bind functionality to input

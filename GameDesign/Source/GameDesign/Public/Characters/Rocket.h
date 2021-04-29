@@ -20,7 +20,7 @@ public:
     float BulletExpiry = 0;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly)
-    bool HitObject = false;
+    bool bHitObject = false;
 
     FVector Velocity = FVector(200.0f);
     

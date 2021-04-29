@@ -79,6 +79,7 @@ void UInventory::CheckItemAdded(AActor* Item)
 void UInventory::AddMaglevPass()
 {
 	float NewAddedSpeed = (Cyborg->DefaultMovementSpeed * 0.15f);
+	Cyborg->MovementSpeedWithItems += NewAddedSpeed;
 	Cyborg->CharMovComp->MaxWalkSpeed += NewAddedSpeed;
 }
 

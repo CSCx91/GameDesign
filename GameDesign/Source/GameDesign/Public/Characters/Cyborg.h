@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 
+#include <tuple>
 #include "Camera/CameraComponent.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -20,17 +21,9 @@ class GAMEDESIGN_API ACyborg : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ACyborg();
+
+	//Primary variables
 	
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
-	USpringArmComponent* SpringArmComp;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
-	UCameraComponent* CameraComp;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
-	UStaticMeshComponent* MeshComp;
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
 	int Magazine = 25;
 
@@ -40,6 +33,10 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
 	bool bIsReloadingSecondary = false;
 
+
+
+	//Utility variables
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
 	bool bIsUtilityActive = false;
 
@@ -55,8 +52,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
 	float UtilityActiveTime= 8.0f;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
-	bool isMovingForward = false;
+
+	
+	//Health variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	float DefaultHealth = 100.0f;
@@ -64,9 +62,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	float MaxHealth = 100.0f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player")
 	float Health;
 
+
+
+	//XP and leveling variables
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	float CurrentXP = 0.0f;
 
@@ -74,22 +76,44 @@ public:
 	float CurrentLVL = 1.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
-	float DefaultMovementSpeed = 600.0f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	float XPRequiredToLVL = 100.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	float XPRequiredToLVLPercent = CurrentXP / XPRequiredToLVL;
+
+
 	
+	//Movement variables
+
+	//For items that don't stack with others
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
+	float DefaultMovementSpeed = 600.0f;
+
+	//For items that do stack with others
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
+	float MovementSpeedWithItems = 600.0f;
+
+
+	//Component variables
+
+	UPROPERTY(VisibleAnywhere)
 	UCharacterMovementComponent* CharMovComp;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
 	UInventory* InventoryComp;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
-	int InteractDistance = 1000;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
+	USpringArmComponent* SpringArmComp;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera")
+	UCameraComponent* CameraComp;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
+	UStaticMeshComponent* MeshComp;
+
+
+	//Class variable for rockets
+	
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
 	TSubclassOf<class ARocket> ProjectileClass;
 
@@ -105,6 +129,9 @@ protected:
 	void MoveRight(float Value);
 	void TurnAtRate(float Value);
 	void LookUpAtRate(float Value);
+
+	//Basic function for all line traces
+	std::tuple<bool, AActor*> TraceForward(float Distance);
 
 	//Primary fire related functions
 	void PrimaryFire();
@@ -127,14 +154,12 @@ protected:
 	void Sprint();
 	void StopSprint();
 
+	//Interact functions
 	void Interact();
 
 	//XP and Leveling related functions
 	void IncreaseLVL();
 	void IncreaseXPRequired();
-	
-	//Overriding basic TakeDamage() to customize it, parameters are the same
-	float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	float BaseTurnRate;
@@ -142,19 +167,32 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	float BaseLookUpRate;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
+
+	//Primary variables
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
 	float PrimaryFireRate = 0.2f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
+	float PrimaryFireDamage = 15.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
+	float PrimaryFireRange = 3000.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	float RocketReloadTime = 6.0f;
-
+	
+	//Interact variables
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
+	int InteractDistance = 1000;
+	
 	//Primary fire timers
 	FTimerHandle FireBulletTimer;
 	FTimerHandle ReloadTimer;
 
 	//Secondary fire timers
 	FTimerHandle FireRocketTimer;
-
+	
 	//Utility timers
 	FTimerHandle UtilityTimer;
 	FTimerHandle UtilityCooldownTimer;

@@ -51,7 +51,7 @@ void ARocket::Tick(float DeltaTime)
         {
             DrawDebugSolidBox(GetWorld(), HitResult.ImpactPoint, FVector(10.f), FColor::Blue, true);
             UE_LOG(LogTemp, Warning, TEXT("%s"), *HitResult.GetActor()->GetName());
-            HitObject = true;
+            bHitObject = true;
             
         }
         else
