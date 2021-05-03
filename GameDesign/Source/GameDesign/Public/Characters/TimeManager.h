@@ -14,16 +14,24 @@ class GAMEDESIGN_API ATimeManager : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ATimeManager();
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Difficulty")
+	float DifficultyValue = 1.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Difficulty")
+	float DifficultyThreshold = 60.0f;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	FTimerHandle DifficultyIncreaseTimer;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Time")
-	float realtimeSeconds;
+	
+	void UpdateDifficultyValue();
+	
 
 };
