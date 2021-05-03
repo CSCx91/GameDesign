@@ -35,6 +35,8 @@ ACyborg::ACyborg()
 
 	Health = DefaultHealth;
 	
+	UtilityDel.BindUFunction(this, FName("UtilityDone"), PrimaryFireRate, RocketReloadTime);
+	
 }
 
 // Called when the game starts or when spawned
@@ -213,24 +215,27 @@ void ACyborg::Utility()
 	{
 		bIsUtilityActive = true;
 		bIsUtilityReady = false;
-		PrimaryFireRate /= 2;
-		RocketReloadTime /= 2;
+		PrimaryFireRate -= (PrimaryFireRate / 2);
+		RocketReloadTime -= (RocketReloadTime / 2);
 		CharMovComp->MaxWalkSpeed += (MovementSpeedWithItems * 0.20);
 	}
 
-	GetWorldTimerManager().SetTimer(UtilityTimer, this, &ACyborg::UtilityDone, UtilityActiveTime, false);
+	GetWorldTimerManager().SetTimer(UtilityTimer, UtilityDel, UtilityActiveTime, false);
 
 	
 }
 
-void ACyborg::UtilityDone()
+void ACyborg::UtilityDone(float PrimaryFireRateAtActive, float RocketReloadTimeAtActive)
 {
-	PrimaryFireRate *= 2;
-	RocketReloadTime *= 2;
-	CharMovComp->MaxWalkSpeed -= (MovementSpeedWithItems * 0.20f);
-	bIsUtilityOnCooldown = true;
-	bIsUtilityActive = false;
-	GetWorldTimerManager().SetTimer(UtilityCooldownTimer, this, &ACyborg::UtilityCooldown, UtilCooldown, false);
+	if(!bIsUtilityOnCooldown)
+	{
+		PrimaryFireRate += (PrimaryFireRateAtActive / 2);
+		RocketReloadTime += (RocketReloadTimeAtActive / 2);
+		CharMovComp->MaxWalkSpeed -= (MovementSpeedWithItems * 0.20f);
+		bIsUtilityOnCooldown = true;
+		bIsUtilityActive = false;
+		GetWorldTimerManager().SetTimer(UtilityCooldownTimer, this, &ACyborg::UtilityCooldown, UtilCooldown, false);
+	}
 }
 
 void ACyborg::UtilityCooldown()
@@ -241,12 +246,14 @@ void ACyborg::UtilityCooldown()
 
 void ACyborg::Sprint()
 {
-	CharMovComp->MaxWalkSpeed *= 1.50f;
+	LastMovementSpeedBeforeSprint = CharMovComp->MaxWalkSpeed;	
+	CharMovComp->MaxWalkSpeed += (LastMovementSpeedBeforeSprint * 0.50f);
+	
 }
 
 void ACyborg::StopSprint()
 {
-	CharMovComp->MaxWalkSpeed /= 1.50f;
+	CharMovComp->MaxWalkSpeed -= (LastMovementSpeedBeforeSprint * 0.50f);
 }
 
 

@@ -50,7 +50,7 @@ public:
 	float UtilCooldown = 12.0f;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
-	float UtilityActiveTime= 8.0f;
+	float UtilityActiveTime = 8.0f;
 
 
 	
@@ -92,8 +92,9 @@ public:
 	//For items that do stack with others
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
 	float MovementSpeedWithItems = 600.0f;
-
 	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
+	float LastMovementSpeedBeforeSprint = 0.0f;	
 
 
 	//Component variables
@@ -119,12 +120,14 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
 	TSubclassOf<class ARocket> ProjectileClass;
 
+	
 	//Fire Rate variable
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
 	float BasePrimaryFireRate = 0.2f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
 	float PrimaryFireRate = 0.2f;
+	
 
 	
 	
@@ -156,7 +159,9 @@ protected:
 
 	//Utility related functions
 	void Utility();
-	void UtilityDone();
+	
+	UFUNCTION()
+	void UtilityDone(float PrimaryFireRateAtActive, float RocketReloadTimeAtActive);
 	void UtilityCooldown();
 
 	//Sprint
@@ -182,8 +187,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
 	float PrimaryFireDamage = 15.0f;
 
-
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
 	float PrimaryFireRange = 3000.0f;
 
@@ -202,12 +205,12 @@ protected:
 	FTimerHandle FireRocketTimer;
 	
 	//Utility timers
+	FTimerDelegate UtilityDel;
 	FTimerHandle UtilityTimer;
 	FTimerHandle UtilityCooldownTimer;
 	
 
 public:	
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	void AddXP(float xp);
