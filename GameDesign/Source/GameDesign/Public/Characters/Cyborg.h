@@ -114,6 +114,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
 	UStaticMeshComponent* MeshComp;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player")
+	UStaticMeshComponent* BarrelEndpoint;
+
 
 	//Class variable for rockets
 	
