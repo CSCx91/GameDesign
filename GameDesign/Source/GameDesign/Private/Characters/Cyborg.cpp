@@ -15,7 +15,7 @@
 ACyborg::ACyborg()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	SpringArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComp"));
 	SpringArmComp->SetupAttachment(RootComponent);
@@ -25,6 +25,10 @@ ACyborg::ACyborg()
 
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PlayerMesh"));
 	MeshComp->SetupAttachment(RootComponent);
+
+	BarrelEndpoint = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Barrel"));
+	BarrelEndpoint->SetupAttachment(GetMesh(), "ForeArm_L_end");
+	
 
 	CharMovComp = GetCharacterMovement();
 
@@ -97,7 +101,7 @@ std::tuple<bool, AActor*> ACyborg::TraceForward(float Distance)
 
 	GetController()->GetPlayerViewPoint(Location, Rotation);
 
-	FVector Start = Location;
+	FVector Start = BarrelEndpoint->GetComponentLocation();
 	FVector End = Start + (Rotation.Vector() * Distance);
 
 	FCollisionQueryParams TraceParams;
@@ -191,12 +195,12 @@ void ACyborg::FireRocket()
 	if (ProjectileClass != NULL)
 	{
 		FRotator SpawnRotation = Rotation;
-		FVector SpawnLocation = Location + (Rotation.Vector());
+		FVector SpawnLocation = BarrelEndpoint->GetComponentLocation();
 		UWorld* const World = GetWorld();
 		if (World != NULL)
 		{
 			ARocket* Rocket = World->SpawnActor<ARocket>(ProjectileClass, SpawnLocation, SpawnRotation);
-			FVector NewVelocity = SpawnRotation.Vector() * 2000.0f;
+			FVector NewVelocity = SpawnRotation.Vector() * 8000.0f;
 			Rocket->Velocity = FVector(NewVelocity);
 		}
 	}
