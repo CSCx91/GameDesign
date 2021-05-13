@@ -52,6 +52,14 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
 	float UtilityActiveTime = 8.0f;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	float PrimaryFireAtActivate;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	float RocketReloadAtActivate;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	float MovementSpeedAtActivate;
 
 	
 	//Health variables
@@ -164,7 +172,7 @@ protected:
 	void Utility();
 	
 	UFUNCTION()
-	void UtilityDone(float PrimaryFireRateAtActive, float RocketReloadTimeAtActive);
+	void UtilityDone(float PrimaryFireRateAtActive, float RocketReloadTimeAtActive, float MovementSpeedAtActive);
 	void UtilityCooldown();
 
 	//Sprint

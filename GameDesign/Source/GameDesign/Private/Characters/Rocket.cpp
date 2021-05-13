@@ -74,19 +74,5 @@ void ARocket::Tick(float DeltaTime)
     {
         Destroy();
     }
-
-    
-}
-
-void ARocket::SpawnObject(FVector Loc, FRotator Rot)
-{
-    FActorSpawnParameters SpawnParams;
-    AActor* SpawnedActorRef = GetWorld()->SpawnActor<AActor>(ActorToSpawn, Loc, Rot, SpawnParams);
-	
-}
-
-void ARocket::DestroySelf()
-{
-    Destroy();
 }
 
