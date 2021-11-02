@@ -102,7 +102,11 @@ public:
 	float MovementSpeedWithItems = 600.0f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement")
-	float LastMovementSpeedBeforeSprint = 0.0f;	
+	float LastMovementSpeedBeforeSprint = 0.0f;
+
+	//Items
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Player")
+	float FireChance = 0.0f;
 
 
 	//Component variables
@@ -219,6 +223,8 @@ protected:
 	FTimerDelegate UtilityDel;
 	FTimerHandle UtilityTimer;
 	FTimerHandle UtilityCooldownTimer;
+
+
 	
 
 public:	

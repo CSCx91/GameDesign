@@ -34,6 +34,8 @@ public:
 
 	void AddGunPolish();
 
+	void AddFire();
+
 	ACyborg* Cyborg;
 
 protected:
