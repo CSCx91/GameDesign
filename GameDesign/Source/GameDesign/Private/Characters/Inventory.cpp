@@ -8,6 +8,7 @@
 #include "Items/DoubleJump.h"
 #include "Items/MaglevPass.h"
 #include "Items/GunPolish.h"
+#include "Items/Fire.h"
 
 
 // Sets default values for this component's properties
@@ -79,6 +80,10 @@ void UInventory::CheckItemAdded(AActor* Item)
 	{
 		AddGunPolish();
 	}
+	if (Item->IsA(AFire::StaticClass()))
+	{
+		AddFire();
+	}
 	
 }
 
@@ -87,6 +92,17 @@ void UInventory::AddMaglevPass()
 	float NewAddedSpeed = (Cyborg->DefaultMovementSpeed * 0.15f);
 	Cyborg->MovementSpeedWithItems += NewAddedSpeed;
 	Cyborg->CharMovComp->MaxWalkSpeed += NewAddedSpeed;
+}
+
+void UInventory::AddFire()
+{
+	if (Cyborg->FireChance == 0) {
+		Cyborg->FireChance = 15.0f;
+	}
+	else
+	{
+		Cyborg->FireChance += 2.5f;
+	}
 }
 
 
