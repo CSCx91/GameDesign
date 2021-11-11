@@ -190,6 +190,10 @@ protected:
 	void IncreaseLVL();
 	void IncreaseXPRequired();
 
+	//Fire Functions
+	void FireHit(AActor *HitActor);
+	void FireHit2();
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	float BaseTurnRate;
 
@@ -223,6 +227,10 @@ protected:
 	FTimerDelegate UtilityDel;
 	FTimerHandle UtilityTimer;
 	FTimerHandle UtilityCooldownTimer;
+
+	//Fire timers
+	FTimerHandle FireTimer;
+	FTimerDelegate FireDel;
 
 
 	

@@ -4,7 +4,10 @@
 #include "Characters/Cyborg.h"
 
 #include <string>
-
+#include <random>
+#include <stdio.h>   
+#include <stdlib.h> 
+#include <time.h>
 #include "DrawDebugHelpers.h"
 #include "Characters/Inventory.h"
 #include "Characters/Rocket.h"
@@ -40,7 +43,6 @@ ACyborg::ACyborg()
 	Health = DefaultHealth;
 	
 	UtilityDel.BindUFunction(this, FName("UtilityDone"), PrimaryFireAtActivate, RocketReloadAtActivate, MovementSpeedWithItems);
-	
 }
 
 // Called when the game starts or when spawned
@@ -141,6 +143,14 @@ void ACyborg::FireBullet()
 		
 		if(bHit && HitActor)
 		{
+			if (FireChance > 0) {
+				srand(time(NULL));
+				float a = rand() % 100;
+				if (a < FireChance) {
+					FireDel.BindUFunction(this, FName("FireHit"), HitActor);
+					GetWorld()->GetTimerManager().SetTimer(FireTimer, FireDel, 5.0f, false);
+				};
+			}
 		    HitActor->TakeDamage(PrimaryFireDamage, FDamageEvent(), GetController(), this);
 		}
 	}
@@ -151,6 +161,12 @@ void ACyborg::FireBullet()
 		GetWorldTimerManager().SetTimer(ReloadTimer, this, &ACyborg::ReloadPrimary, 2.5f, false);
 	}
 }
+
+void ACyborg::FireHit(AActor *HitActor)
+{
+	HitActor->TakeDamage(10.0f, FDamageEvent(), GetController(), this);
+}
+
 
 //This function is called once reloading is done aka when the timer is completed
 void ACyborg::ReloadPrimary()

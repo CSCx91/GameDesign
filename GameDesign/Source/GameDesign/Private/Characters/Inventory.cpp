@@ -96,7 +96,8 @@ void UInventory::AddMaglevPass()
 
 void UInventory::AddFire()
 {
-	if (Cyborg->FireChance == 0) {
+	if (Cyborg->FireChance == 0) 
+	{
 		Cyborg->FireChance = 15.0f;
 	}
 	else
